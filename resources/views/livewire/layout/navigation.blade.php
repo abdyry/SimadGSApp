@@ -33,6 +33,9 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('topics.index')" :active="request()->routeIs('topics.index')" wire:navigate>
+                        {{ __('My Topics') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -84,6 +87,8 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+             <!-- Add a link to the topics list -->
+
         </div>
 
         <!-- Responsive Settings Options -->
