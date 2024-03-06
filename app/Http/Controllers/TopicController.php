@@ -101,4 +101,16 @@ public function destroy(Topic $topic)
     return redirect()->route('topics.index')->with('success', 'Topic deleted successfully!');
 }
 
+public function show(Topic $topic)
+{
+    // Eager load comments for the topic
+    $topic->load('comments');
+
+    // Retrieve the comments associated with the topic
+    $comments = $topic->comments;
+
+    // Pass the topic and comments data to the view
+    return view('topics.show', compact('topic', 'comments'));
+}
+
 }

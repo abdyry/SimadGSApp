@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +17,18 @@ use App\Http\Controllers\TopicController;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
+  
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-    // Route to list topics
+//Topics
+
+
+// Route to list topics
 Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
 
 // Route to show the topic creation form
@@ -43,5 +48,25 @@ Route::put('/topics/{topic}', [TopicController::class, 'update'])->name('topics.
 
 // Route to delete a topic
 Route::delete('/topics/{topic}', [TopicController::class, 'destroy'])->name('topics.destroy');
+
+
+//Comments
+
+
+// Route to show the comment creation form
+Route::get('/comments/create', [CommentController::class, 'create'])->name('comments.create');
+
+// Route to store a new comment
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+// Route to show the comment edit form
+Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+
+// Route to update a comment
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+// Route to delete a comment
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 
 require __DIR__.'/auth.php';
